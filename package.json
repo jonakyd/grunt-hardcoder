@@ -1,0 +1,43 @@
+{
+  "name": "grunt-hardcoder",
+  "description": "Grunt task plugin can help you compose JS/Coffee scripts with CommonJS/AMD/'use strict' wrapper.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jonakyd/grunt-hardcoder",
+  "author": {
+    "name": "Jonathan Dang",
+    "email": "jonakyd@gmail.com",
+    "url": "http://jonakyd.me"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonakyd/grunt-hardcoder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jonakyd/grunt-hardcoder/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/jonakyd/grunt-hardcoder/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt": "~0.4.1"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
+}
