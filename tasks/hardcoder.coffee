@@ -28,8 +28,15 @@ module.exports = (grunt) ->
        wrapperObj.begin = EXPORTS_WRAPPER_BEGIN
        wrapperObj.end = EXPORTS_WRAPPER_END
 
-  wrapStrict = ( isStrict, wrapperObj ) ->
-    wrapperObj.begin += STRICT if isStrict
+  appendStrict = ( wrapperObj ) ->
+    wrapperObj.begin += STRICT
+
+  appendGlobals = ( globals, wrapperObj ) ->
+    globals.forEach ( global ) ->
+      smallCamel = global.toLowerCase()
+      bigCamel = smallCamel[ 0 ].toUpperCase() + smallCamel.substr( 1, smallCamel.length )
+      str = 'var ' + bigCamel + ' = require( "' + smallCamel + '" );'
+      wrapperObj.begin += str
 
   wrapCoffee = ( wrapperObj ) ->
     wrapperObj.begin = COFFEE_ESCAPE + wrapperObj.begin + COFFEE_ESCAPE
@@ -41,9 +48,13 @@ module.exports = (grunt) ->
       isStrict: true  # default all files entitle 'use strict'
       wrapperType: 'amd' # false || exports || amd
       exportsType: false # false || function || var || all(function + var) || filename
+      globals: [] # globals var injection
       # ignoreStartsWith_:true -> exports extension
 
+    grunt.verbose.writeflags @
+
     @files.forEach (f) ->
+
       f.src
         .filter ( filePath ) ->
           isFileExist = grunt.file.exists filePath
@@ -60,9 +71,13 @@ module.exports = (grunt) ->
             end: ''
 
           wrapScipts options.wrapperType, wrapper
-          wrapStrict options.isStrict, wrapper
-          wrapCoffee wrapper if isCoffee filePath
 
-          # grunt.log.ok filePath + '->' + f.dest.cyan
+          if options.isStrict
+            appendStrict wrapper
+          if options.globals
+            appendGlobals options.globals, wrapper
+          if isCoffee filePath
+            wrapCoffee wrapper
 
           grunt.file.write f.dest, [ wrapper.begin, code, wrapper.end ].join grunt.util.linefeed
+          grunt.log.writeln 'File ' + f.dest.cyan + ' created'

@@ -1,7 +1,7 @@
 {
   "name": "grunt-hardcoder",
   "description": "Grunt task plugin can help you compose JS/Coffee scripts with CommonJS/AMD/'use strict' wrapper.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/jonakyd/grunt-hardcoder",
   "author": {
     "name": "Jonathan Dang",
