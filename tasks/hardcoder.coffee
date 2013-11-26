@@ -42,9 +42,9 @@ module.exports = (grunt) ->
 
   appendGlobals = ( wrapperObj, globals ) ->
     globals.forEach ( global ) ->
-      smallCamel = global.toLowerCase()
-      bigCamel = smallCamel[ 0 ].toUpperCase() + smallCamel.substr( 1, smallCamel.length )
-      str = 'var ' + bigCamel + ' = require( "' + smallCamel + '" );'
+      varName    = global.varName
+      moduleName = global.moduleName
+      str = 'var ' + varName + ' = require( "' + moduleName + '" );'
       wrapperObj.begin += str
 
   grunt.registerMultiTask 'hardcoder', 'Grunt task plugin can help you compose JS/Coffee scripts with CommonJS/AMD/\'use strict\' wrapper.', () ->
