@@ -39,5 +39,9 @@
   },
   "keywords": [
     "gruntplugin"
-  ]
+  ],
+  "dependencies": {
+    "load-grunt-tasks": "^3.1.0",
+    "time-grunt": "^1.1.0"
+  }
 }
